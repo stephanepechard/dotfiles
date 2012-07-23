@@ -1,3 +1,10 @@
+Documentation
+
+http://stevelosh.com/blog/2010/02/my-extravagant-zsh-prompt/
+http://www.drbunsen.org/text-triumvirate.html
+
+
+
 Installation
 
     git clone git://github.com/nelstrom/dotfiles.git
