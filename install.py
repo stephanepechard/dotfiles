@@ -39,12 +39,17 @@ def link_files():
         #print("[INFO] {0} -> {1}".format(localname, deployname))
 
         if not os.path.islink(deployname):
-            print("[INFO] Could link {0}".format(deployname))
-            #os.symlink("src_dir", "dst_dir")
+            print("[INFO] Currently no link {0}".format(deployname))
 
+            if os.path.exists(deployname):
+                print("...... but the file exists!")
+
+            #os.symlink("src_dir", "dst_dir")
         else:
             currentname = os.readlink(deployname)
             print("[INFO] Link currently points to: {0}".format(currentname))
+
+
 
 link_files()
 
