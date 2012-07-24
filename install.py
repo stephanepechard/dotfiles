@@ -37,9 +37,14 @@ def link_files():
         localname = os.path.join(os.path.dirname(__file__), 'files', filename)
         deployname = os.path.join('/home', username, '.' + filename)
         #print("[INFO] {0} -> {1}".format(localname, deployname))
+
         if not os.path.islink(deployname):
             print("[INFO] Could link {0}".format(deployname))
             #os.symlink("src_dir", "dst_dir")
+
+        else:
+            currentname = os.readlink(deployname)
+            print("[INFO] Link currently points to: {0}".format(currentname))
 
 link_files()
 
