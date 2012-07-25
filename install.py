@@ -6,6 +6,7 @@
 # system
 import getpass
 import os
+import re
 from subprocess import call
 
 
@@ -55,19 +56,16 @@ def link_files():
 
 def test():
     print("[INFO] Test function")
+    
 
 def main():
     """ Run any function as a parameter (fab-like). """
     class_functions = []
-    for key in __file__.__dict__.keys():
-        print(key)
-
-
-  #      if (inspect.isfunction(func)):
-
-    functions = sorted(class_functions, key=lambda func: func.__name__)
-    for function in functions:
-        print("[INFO] function: {0}".format(function))
+    with open(__file__, 'r') as f:
+        for line in f:
+            matches = re.match(r"def (.*)():", line)
+            if (matches):
+                print(matches.groups()[0])
 
 
 if __name__ == '__main__':
