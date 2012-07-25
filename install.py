@@ -56,7 +56,7 @@ def link_files():
 
 def test():
     print("[INFO] Test function")
-    
+
 
 def main():
     """ Run any function as a parameter (fab-like). """
@@ -70,5 +70,4 @@ def main():
 
 if __name__ == '__main__':
     main()
-
 
