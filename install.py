@@ -18,17 +18,18 @@ def install():
     link_config()
 
 
-def clone_omz():
-    """ Get oh-my-zsh code. """
+def clone_code():
+    """ Get all third-party code. """
     call(['git', 'clone',
     'git://github.com/robbyrussell/oh-my-zsh.git', 'files/oh-my-zsh'])
-
-
-def clone_solarized():
-    """ Get Solarized code. """
     call(['git', 'clone',
     'git://github.com/altercation/solarized.git', 'solarized'])
-
+    call(['git', 'clone',
+    'git://github.com/phiggins/konsole-colors-solarized.git',
+    'konsole-colors-solarized'])
+    call(['git', 'clone',
+    'git://github.com/hayalci/kde-colors-solarized.git',
+    'kde-colors-solarized'])
 
 def link_files():
     """ Create symbolic links to everything in the files directory. """
