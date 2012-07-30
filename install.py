@@ -12,8 +12,7 @@ from subprocess import call
 
 def install():
     """ Do everything. """
-    clone_omz()
-    clone_solarized()
+    clone_code()
     link_files()
     link_config()
 
@@ -32,6 +31,7 @@ def clone_code():
     call(['git', 'clone',
     'git://github.com/hayalci/kde-colors-solarized.git',
     'external/kde-colors-solarized'])
+
 
 def link_files():
     """ Create symbolic links to everything in the files directory. """
@@ -54,11 +54,14 @@ def link_files():
             print("[INFO] Link currently points to: {0}".format(currentname))
 
 
+def link_custom():
+    fileslist = os.listdir(os.path.join(os.path.dirname(__file__), 'custom'))
+    for filename in fileslist:
+    #    if ext == 'zsh':
+    #       os.symlink( 
+        print(filename)
 
-#link_files()
-
-def test():
-    print("[INFO] Test function")
+link_custom()
 
 
 def main():
