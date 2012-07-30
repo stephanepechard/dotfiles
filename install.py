@@ -57,11 +57,26 @@ def link_files():
 def link_custom():
     fileslist = os.listdir(os.path.join(os.path.dirname(__file__), 'custom'))
     for filename in fileslist:
-    #    if ext == 'zsh':
-    #       os.symlink( 
-        print(filename)
+        (root, ext) = os.path.splitext(filename) 
+        if ext == '.zsh-theme':
+           os.symlink(filename, os.path.join('files/oh-my-zsh/themes', filename))
+
+        print(ext)
 
 link_custom()
+
+
+def make_link(src, dst):
+    if not os.path.islink(dst):
+        if not os.path.exists(dst):
+            os.symlink(src, dst)
+            print("[INFO] {0} -> {1}".format(src, dst))
+        else:
+            print("[INFO] There is a file already named {0}".format(dst))
+    else:
+        print("[INFO] {0} is aleady linked to {1}".format(src, dst))
+
+
 
 
 def main():
