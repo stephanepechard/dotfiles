@@ -18,14 +18,26 @@ alias du='du --human-readable'
 alias md='mkdir'
 alias rd='rmdir'
 alias upgrade='sudo aptitude update && sudo aptitude safe-upgrade && sudo aptitude autoclean && sudo update-flashplugin-nonfree --install'
+alias kate='kate -u'
+alias f='find . -name'
+alias pylint='pylint --rcfile=~/.pylintrc'
+alias a='source venv/bin/activate'
+alias r='python manage.py runserver'
+# anti-clumsy fingers
+alias sl=ls # often screw this up
+alias kk='ll'
+alias mm='ll'
+# local machine
+alias dolly='ssh -p 4242 stephane@192.168.0.10'
+alias marvin="ssh -c arcfour,blowfish-cbc -XC stephane@192.168.0.11"
+alias snoweee='ssh -c arcfour,blowfish-cbc -XC eloise@192.168.0.12'
+alias tineee='ssh -c arcfour,blowfish-cbc -XC stephane@192.168.0.13'
+alias cosmocat='ssh -c arcfour,blowfish-cbc -XC eloise@192.168.0.14'
+
 
 # Push and pop directories on directory stack
 alias pu='pushd'
 alias po='popd'
-
-# Basic directory operations
-alias ...='cd ../..'
-alias -- -='cd -'
 
 # Super user
 alias _='sudo'
@@ -33,11 +45,4 @@ alias _='sudo'
 # Show history
 alias history='fc -l 1'
 
-# List direcory contents
-alias lsa='ls -lah'
-alias l='ls -la'
-alias ll='ls -l'
-alias sl=ls # often screw this up
-
 alias afind='ack-grep -il'
-

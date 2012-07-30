@@ -21,15 +21,17 @@ def install():
 def clone_code():
     """ Get all third-party code. """
     call(['git', 'clone',
-    'git://github.com/robbyrussell/oh-my-zsh.git', 'files/oh-my-zsh'])
+    'git://github.com/robbyrussell/oh-my-zsh.git',
+    'files/oh-my-zsh'])
     call(['git', 'clone',
-    'git://github.com/altercation/solarized.git', 'solarized'])
+    'git://github.com/altercation/solarized.git',
+    'external/solarized'])
     call(['git', 'clone',
     'git://github.com/phiggins/konsole-colors-solarized.git',
-    'konsole-colors-solarized'])
+    'external/konsole-colors-solarized'])
     call(['git', 'clone',
     'git://github.com/hayalci/kde-colors-solarized.git',
-    'kde-colors-solarized'])
+    'external/kde-colors-solarized'])
 
 def link_files():
     """ Create symbolic links to everything in the files directory. """
