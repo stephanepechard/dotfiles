@@ -17,10 +17,41 @@ ZSH_THEME="s13d"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git)
+plugins=(git svn)
 
 source $ZSH/oh-my-zsh.sh
+
 
 # Customize to your needs...
 THISDIR=$(dirname "$(readlink ${ZDOTDIR-~}/.zshrc )" )
 for config_file ($THISDIR/../custom/*.zsh) source $config_file
+
+## autoloads
+#autoload -Uz vcs_info
+autoload -Uz vcs_info zstyle ':vcs_info:*' enable git svn
+    
+## functions
+
+# yep, that rocks
+xt () {
+   if [ -f $1 ] ; then
+       case $1 in
+		*.bz2)		bunzip2 $1 && cd $(basename "$1" /bz2) ;;
+		*.rar)		unrar x $1 && cd $(basename "$1" .rar) ;;
+		*.tar.bz2)	tar xvjf $1 && cd $(basename "$1" .tar.bz2) ;;
+		*.tar.gz)	tar xvzf $1 && cd $(basename "$1" .tar.gz) ;;
+		*.tar.xz)	tar Jxvf $1 && cd $(basename "$1" .tar.xz) ;;
+		*.gz)		gunzip $1 && cd $(basename "$1" .gz) ;;
+		*.tar)		tar xvf $1 && cd $(basename "$1" .tar) ;;
+		*.tbz2)		tar xvjf $1 && cd $(basename "$1" .tbz2) ;;
+		*.tgz)		tar xvzf $1 && cd $(basename "$1" .tgz) ;;
+		*.zip)		unzip $1 && cd $(basename "$1" .zip) ;;
+		*.Z)		uncompress $1 && cd $(basename "$1" .Z) ;;
+		*.7z)		7z x $1 && cd $(basename "$1" .7z) ;;
+		*)		echo "don't know how to extract '$1'..." ;;
+       esac
+   else
+       echo "Error: '$1' is not a valid file!"
+	   exit 0
+   fi
+}

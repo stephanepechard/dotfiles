@@ -17,10 +17,12 @@ ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$FG[190]%}✭%{$reset_color%}"
 if [ "`id -u`" -eq 0 ]; then # root
     #PS1="%{[36;1m%}%T %{[34m%}%n%{[33m%}@%{[37m%}%m %{[32m%}%~%{[33m%}%#%{[0m%} "
 else # user
-    PROMPT='%{$fg[cyan]%}%T%{$fg[white]%} %{$fg_bold[red]%}%n%{$fg_bold[cyan]%}@%{$fg_bold[white]%}%m %{$fg[green]%}%0~ %{$fg[cyan]%}$%{$reset_color%} '
+    PROMPT='%{$fg[cyan]%}%T%{$fg[white]%} %{$fg_bold[red]%}%n%{$fg_bold[cyan]%}@%{$fg_bold[white]%}%m %{$fg[green]%}${PWD/#$HOME/~} %{$fg[cyan]%}$%{$reset_color%} '
     #PS1="%{[36;1m%}%T %{[31m%}%n%{[33m%}@%{[37m%}%m %{[32m%}%~%{[33m%}%#%{[0m%} "
 fi
 
 
 # right prompt
-RPROMPT='$(git_prompt_info)'
+RPROMPT='$(git_prompt_info)$(svn_prompt_info)'
+
+
