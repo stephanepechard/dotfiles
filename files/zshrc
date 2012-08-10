@@ -27,9 +27,10 @@ THISDIR=$(dirname "$(readlink ${ZDOTDIR-~}/.zshrc )" )
 for config_file ($THISDIR/../custom/*.zsh) source $config_file
 
 ## autoloads
-#autoload -Uz vcs_info
-autoload -Uz vcs_info zstyle ':vcs_info:*' enable git svn
-    
+autoload -Uz vcs_info
+#autoload -Uz vcs_info zstyle ':vcs_info:*' enable git svn # does not work well...
+
+
 ## functions
 
 # yep, that rocks
