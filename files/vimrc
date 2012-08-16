@@ -61,7 +61,6 @@ set gdefault
 set incsearch
 set showmatch
 set hlsearch
-nnoremap <leader><space> :noh<cr> "" clear a search result
 nnoremap <tab> %
 vnoremap <tab> %
 
@@ -87,16 +86,32 @@ nnoremap k gk
 "" save on losing focus
 au FocusLost * :wa
 
+" ========== END Vim Basic Settings ============="
 
-"" Fun with the Leader
+
+
+" ========== Leader mappings =========="
+"" clear a search result
+nnoremap <leader><space> :noh<cr>
+
 "" strip all trailing whitespace in the current file
 nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
 
-"" split windows fun
-nnoremap <leader>w <C-w>v<C-w>l  "" open a new vertical window and go for it
+"" open a new vertical window and go for it
+nnoremap <leader>w <C-w>v<C-w>l
+
+
+" ========== END Leader mappings =========="
+
 
 
 " ========== Plugin Settings =========="
+
+"" minibufexpl
+let g:miniBufExplMapWindowNavVim = 1 " use Ctrl + [hjkl] to window movement commands
+let g:miniBufExplMapWindowNavArrows = 1 " use Ctrl + arrows to window movement commands
+let g:miniBufExplSplitBelow=1 " Put new window below current or on the right for vertical split
+
 
 
 set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 10

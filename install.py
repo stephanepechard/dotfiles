@@ -12,22 +12,25 @@ from subprocess import call
 
 def install():
     """ Do everything. """
-    clone_code()
+    init()
     link_files()
     link_config()
 
 
-def clone_code():
+def init():
     """ Get all third-party code. """
-    call(['git', 'clone',
-    'git://github.com/altercation/solarized.git',
-    'external/solarized'])
-    call(['git', 'clone',
-    'git://github.com/phiggins/konsole-colors-solarized.git',
-    'external/konsole-colors-solarized'])
-    call(['git', 'clone',
-    'git://github.com/hayalci/kde-colors-solarized.git',
-    'external/kde-colors-solarized'])
+    call(['git', 'submodule', 'init'])
+    call(['git', 'submodule', 'update'])
+
+#    call(['git', 'clone',
+#    'git://github.com/altercation/solarized.git',
+#    'external/solarized'])
+#    call(['git', 'clone',
+#    'git://github.com/phiggins/konsole-colors-solarized.git',
+#    'external/konsole-colors-solarized'])
+#    call(['git', 'clone',
+#    'git://github.com/hayalci/kde-colors-solarized.git',
+#    'external/kde-colors-solarized'])
 
 
 def link_files():
