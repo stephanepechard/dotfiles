@@ -20,9 +20,6 @@ def install():
 def clone_code():
     """ Get all third-party code. """
     call(['git', 'clone',
-    'git://github.com/robbyrussell/oh-my-zsh.git',
-    'files/oh-my-zsh'])
-    call(['git', 'clone',
     'git://github.com/altercation/solarized.git',
     'external/solarized'])
     call(['git', 'clone',
