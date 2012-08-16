@@ -141,7 +141,7 @@ compinit
 #########################
 # 6. Fonctions diverses #
 #########################
-function scpTorrent() { scp $* stephane@192.168.0.10:~/.rtorrent/todl/ ;}
+function sdl() { scp $* stephane@s13d.fr:~/.rtorrent/todl/ ;}
 
 function workon_venv() {
 if [ -e .git ]; then

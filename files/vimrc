@@ -1,16 +1,24 @@
-"" general
-filetype off                   " required!
+" ========== Vim Basic Settings ============="
+
+"" Pathogen settings.
+filetype off
 call pathogen#runtime_append_all_bundles()
 filetype plugin indent on
-set nocompatible               " be iMproved
+
+"" Make vim incompatbile to vi.
+set nocompatible
 set modelines=0
 
-"" good stuff
-syntax on
-set number
-set laststatus=2                " Always show the statusline
+"" TAB settings.
+set tabstop=4
+set shiftwidth=4
+set softtabstop=4
+set expandtab
+
+"" More Common Settings.
 set encoding=utf-8
 set scrolloff=3
+syntax on
 set autoindent
 set showmode
 set showcmd
@@ -18,27 +26,31 @@ set hidden
 set wildmenu
 set wildmode=list:longest
 set visualbell
-set cursorline
+set noerrorbells
+set lazyredraw
+
+"" Set cursorline
 set ttyfast
 set ruler
 set backspace=indent,eol,start
 set laststatus=2
-set relativenumber      "" changes Vim’s line number column to display how far away each line is from the current one
-set undofile
-set directory=~/.vim/tmp
-set noerrorbells
-set ruler
+set cursorline
 
-"" tabs
-set tabstop=4
-set shiftwidth=4
-set softtabstop=4
-set expandtab
+"" Line numbers
+set number
+set relativenumber      "" changes Vim’s line number column to display how far away each line is from the current one
+
+"" Sync and undo
 set nofsync
 set swapsync=
+set undofile
+set directory=~/.vim/tmp
 
-"" change the leader key
+"" Change the leader key
 let mapleader = ","
+
+" Set title to window
+set title
 
 """ searching/moving
 nnoremap / /\v
@@ -53,11 +65,12 @@ nnoremap <leader><space> :noh<cr> "" clear a search result
 nnoremap <tab> %
 vnoremap <tab> %
 
-"" handling long lines
+"" Make Vim to handle long lines nicely.
 set wrap
 set textwidth=79
 set formatoptions=qrn1
-set colorcolumn=85
+set colorcolumn=80
+colorschem desert
 
 "" hardcore Vim, disable arrows to force you to use hjkl :-)
 nnoremap <up> <nop>
@@ -83,7 +96,8 @@ nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
 nnoremap <leader>w <C-w>v<C-w>l  "" open a new vertical window and go for it
 
 
-"""""""""""""""""""" PLUGINS
+" ========== Plugin Settings =========="
+
 
 set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 10
 let g:Powerline_symbols = 'fancy'
@@ -93,6 +107,8 @@ map <C-o> :CommandT<CR>
 let g:CommandTAcceptSelectionMap = '<CR>'
 let g:CommandTCancelMap = '<C-g>'
 
+" Mapping to NERDTree
+"" nnoremap <C-n> :NERDTreeToggle<cr>
 let NERDChristmasTree = 1
 let NERDTreeSortOrder = ['\/$', '\.js*', '\.cpp$', '\.h$', '*']
 nmap <c-b> :NERDTreeToggle<cr>
@@ -101,3 +117,5 @@ nmap <C-p> <c-w><left><up><c-w><c-w>
 nmap <C-o> <c-w><left><CR>
 
 set fillchars+=stl:\ ,stlnc:\
+
+" =========== END Plugin Settings =========="
