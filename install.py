@@ -30,8 +30,8 @@ def make_symlink(src, dst):
     """ Securely create a symbolic link. """
     if not os.path.islink(dst):
         if not os.path.exists(dst):
-            os.symlink(src, dst)
             print("[INFO] {0} -> {1}".format(src, dst))
+            os.symlink(src, dst)
         else:
             print("[INFO] There is a file already named {0}".format(dst))
     else:
