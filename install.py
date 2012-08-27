@@ -43,8 +43,8 @@ def link_files():
     username = getpass.getuser()
     fileslist = os.listdir(os.path.join(os.path.dirname(__file__), 'files'))
     for filename in fileslist:
-        filename = os.path.dirname(os.path.abspath(__file__))
-        localname = os.path.join(filename, 'files', filename)
+        realfile = os.path.dirname(os.path.abspath(__file__))
+        localname = os.path.join(realfile, 'files', filename)
         deployname = os.path.join('/home', username, '.' + filename)
         make_symlink(localname, deployname)
 
