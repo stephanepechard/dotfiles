@@ -56,7 +56,7 @@ def link_custom():
         (root, ext) = os.path.splitext(filename) 
         if ext == '.zsh-theme':
             localname = os.path.join(realfile, 'files/oh-my-zsh/themes', filename)
-            make_symlink(filename, localname)
+            make_symlink(os.path.join(custom, filename), localname)
 
 
 def main():
