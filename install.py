@@ -43,21 +43,10 @@ def link_files():
     username = getpass.getuser()
     fileslist = os.listdir(os.path.join(os.path.dirname(__file__), 'files'))
     for filename in fileslist:
-        localname = os.path.join(os.path.dirname(__file__), 'files', filename)
+        filename = os.path.dirname(os.path.abspath(__file__))
+        localname = os.path.join(filename, 'files', filename)
         deployname = os.path.join('/home', username, '.' + filename)
         make_symlink(localname, deployname)
-        #print("[INFO] {0} -> {1}".format(localname, deployname))
-
-        #if not os.path.islink(deployname):
-            #print("[INFO] Currently no link {0}".format(deployname))
-
-            #if os.path.exists(deployname):
-                #print("...... but the file exists!")
-
-            #os.symlink(localname, deployname)
-        #else:
-            #currentname = os.readlink(deployname)
-            #print("[INFO] Link currently points to: {0}".format(currentname))
 
 
 def link_custom():
