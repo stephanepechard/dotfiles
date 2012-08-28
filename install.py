@@ -9,6 +9,19 @@ import os
 import re
 from subprocess import call
 
+# globals
+THISDIR = os.path.dirname(os.path.abspath(__file__))
+
+
+def print_info_ok(message):
+    """ Format a string into an OK information shell line. """
+    return '[INFO] \x1b[{0}m{1}\x1b[0m'.format(32, message)
+
+
+def print_info_ko(message):
+    """ Format a string into an KO information shell line. """
+    return '[INFO] \x1b[{0}m{1}\x1b[0m'.format(33, message)
+
 
 def init():
     """ Get all third-party code. """
@@ -30,12 +43,12 @@ def make_symlink(src, dst):
     """ Securely create a symbolic link. """
     if not os.path.islink(dst):
         if not os.path.exists(dst):
-            print("[INFO] {0} -> {1}".format(src, dst))
+            print_info_ok("{0} -> {1}".format(src, dst))
             os.symlink(src, dst)
         else:
-            print("[INFO] There is a file already named {0}".format(dst))
+            print_info_ko("There is a file already named {0}".format(dst))
     else:
-        print("[INFO] {0} is aleady linked to {1}".format(src, dst))
+        print_info_ko("{0} is aleady linked to {1}".format(src, dst))
 
 
 def link_files():
@@ -43,20 +56,20 @@ def link_files():
     username = getpass.getuser()
     fileslist = os.listdir(os.path.join(os.path.dirname(__file__), 'files'))
     for filename in fileslist:
-        realfile = os.path.dirname(os.path.abspath(__file__))
-        localname = os.path.join(realfile, 'files', filename)
+        localname = os.path.join(THISDIR, 'files', filename)
         deployname = os.path.join('/home', username, '.' + filename)
         make_symlink(localname, deployname)
 
 
 def link_custom():
+    """ Create specific symbolic links to customed files. """
     fileslist = os.listdir(os.path.join(os.path.dirname(__file__), 'custom'))
     for filename in fileslist:
-        realfile = os.path.dirname(os.path.abspath(__file__))
         (root, ext) = os.path.splitext(filename) 
         if ext == '.zsh-theme':
-            localname = os.path.join(realfile, 'files/oh-my-zsh/themes', filename)
-            make_symlink(os.path.join('custom', filename), localname)
+            localname = os.path.join(THISDIR, 'custom', filename)
+            deployname = os.path.join(THISDIR, 'files/oh-my-zsh/themes', filename)
+            make_symlink(localname, deployname)
 
 
 def main():
