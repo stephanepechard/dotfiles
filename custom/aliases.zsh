@@ -5,6 +5,7 @@ alias la='ls -a'
 alias lla='ls -la'
 # color and number of line in 'grep'
 alias grep='grep -n --color=auto'
+alias ggrep='git grep --color -n -P';
 # careful with that axe, eugene
 alias cp='cp --interactive'
 alias mv='mv --interactive'

@@ -15,12 +15,12 @@ THISDIR = os.path.dirname(os.path.abspath(__file__))
 
 def print_info_ok(message):
     """ Format a string into an OK information shell line. """
-    return '[INFO] \x1b[{0}m{1}\x1b[0m'.format(32, message)
+    print('[INFO] \x1b[{0}m{1}\x1b[0m'.format(32, message))
 
 
 def print_info_ko(message):
     """ Format a string into an KO information shell line. """
-    return '[INFO] \x1b[{0}m{1}\x1b[0m'.format(33, message)
+    print('[INFO] \x1b[{0}m{1}\x1b[0m'.format(33, message))
 
 
 def init():
