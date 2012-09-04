@@ -21,6 +21,10 @@ def print_info_ko(message):
     print('[INFO] \x1b[{0}m{1}\x1b[0m'.format(33, message))
 
 
+def current_dir():
+    return os.path.dirname(os.path.abspath(__file__))
+
+
 def init():
     """ Get all third-party code. """
     call(['git', 'submodule', 'init'])
@@ -54,20 +58,22 @@ def link_files():
     username = getpass.getuser()
     fileslist = os.listdir(os.path.join(os.path.dirname(__file__), 'files'))
     for filename in fileslist:
-        localname = os.path.join(THISDIR, 'files', filename)
-        deployname = os.path.join('/home', username, '.' + filename)
-        make_symlink(localname, deployname)
+        if not filename.startswith('.'):
+            localname = os.path.join(current_dir(), 'files', filename)
+            deployname = os.path.join('/home', username, '.' + filename)
+            make_symlink(localname, deployname)
 
 
 def link_custom():
     """ Create specific symbolic links to customed files. """
     fileslist = os.listdir(os.path.join(os.path.dirname(__file__), 'custom'))
     for filename in fileslist:
-        (root, ext) = os.path.splitext(filename) 
-        if ext == '.zsh-theme':
-            localname = os.path.join(THISDIR, 'custom', filename)
-            deployname = os.path.join(THISDIR, 'files/oh-my-zsh/themes', filename)
-            make_symlink(localname, deployname)
+        if not filename.startswith('.'):
+            (root, ext) = os.path.splitext(filename) 
+            if ext == '.zsh-theme':
+                localname = os.path.join(current_dir(), 'custom', filename)
+                deployname = os.path.join(current_dir(), 'files/oh-my-zsh/themes', filename)
+                make_symlink(localname, deployname)
 
 
 def run_install(args):
