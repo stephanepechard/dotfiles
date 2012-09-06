@@ -1,5 +1,5 @@
 # the way i like ls
-alias ls='ls --classify --tabsize=0 --literal -G --show-control-chars --human-readable'
+alias ls='ls --color=auto --classify --tabsize=0 --literal -G --show-control-chars --human-readable'
 alias ll='ls -l'
 alias la='ls -a'
 alias lla='ls -la'
