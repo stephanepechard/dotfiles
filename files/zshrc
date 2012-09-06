@@ -46,6 +46,7 @@ xt () {
 		*.tar)		tar xvf $1 && cd $(basename "$1" .tar) ;;
 		*.tbz2)		tar xvjf $1 && cd $(basename "$1" .tbz2) ;;
 		*.tgz)		tar xvzf $1 && cd $(basename "$1" .tgz) ;;
+        *.xz)       xz -d $1 && cd $(basename "$1" .xz) ;;
 		*.zip)		unzip $1 && cd $(basename "$1" .zip) ;;
 		*.Z)		uncompress $1 && cd $(basename "$1" .Z) ;;
 		*.7z)		7z x $1 && cd $(basename "$1" .7z) ;;
@@ -56,3 +57,9 @@ xt () {
 	   exit 0
    fi
 }
+
+
+# Android tools
+export PATH=${PATH}:~/android/sdk/tools
+export PATH=${PATH}:~/android/sdk/platform-tools
+
