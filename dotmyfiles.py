@@ -54,7 +54,8 @@ def make_symlink(src, dst):
 
 
 def link_files():
-    """ Create symbolic links to everything in the files directory. """
+    """ Create symbolic links to everything in the files directory
+        except already dotted files. """
     username = getpass.getuser()
     fileslist = os.listdir(os.path.join(os.path.dirname(__file__), 'files'))
     for filename in fileslist:
@@ -83,7 +84,7 @@ def run_install(args):
     link_custom()
 
 
-def run_check(args):
+def run_status(args):
     """ Print information about the current state of the user's dotfiles. """
     pass
 
@@ -95,11 +96,12 @@ def main():
     args = parser.parse_args()
     
     # dispatch command to functions
-    if args.command == 'check':
-        run_check(args)
-
     if args.command == 'install':
         run_install(args)
+
+    if args.command == 'status':
+        run_status(args)
+
     
 
 if __name__ == '__main__':
