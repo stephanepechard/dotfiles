@@ -50,7 +50,7 @@ def make_symlink(src, dst):
         else:
             print_info_ko("There is a file already named {0}".format(dst))
     else:
-        print_info_ko("{0} is aleady linked to {1}".format(src, dst))
+        print_info_ko("{0} is already linked to {1}".format(src, dst))
 
 
 def link_files():
@@ -63,6 +63,35 @@ def link_files():
             localname = os.path.join(current_dir(), 'files', filename)
             deployname = os.path.join('/home', username, '.' + filename)
             make_symlink(localname, deployname)
+
+
+def show_links():
+    """ Check symbolic links already installed against what's into 'files'."""
+    username = getpass.getuser()
+    fileslist = os.listdir(os.path.join(os.path.dirname(__file__), 'files'))
+
+    max_length = 0
+    dst_list = []
+    for filename in fileslist:
+        if not filename.startswith('.'):
+            localname = os.path.join(current_dir(), 'files', filename)
+            dst = os.path.join('/home', username, '.' + filename)
+            dst_list.append((localname, dst))
+            if max_length < len(dst):
+                max_length = len(dst)
+
+    dst_list = sorted(dst_list, key=lambda d: d[0])   # sort by localname
+    max_length = max_length + 4
+    for localname, dst in dst_list:
+        if not os.path.islink(dst):
+            if not os.path.exists(dst):
+                print_info_ok("{0:{1}} No link (yet)!".format(dst, max_length))
+            else:
+                print_info_ko("{0:{1}} There's a file at this place...".format(dst, max_length))
+        else:
+            target = os.path.join(os.path.dirname(dst), os.readlink(dst))
+            if target == localname:
+                print("[INFO] {0:{1}} OK".format(dst, max_length))
 
 
 def link_custom():
@@ -86,7 +115,7 @@ def run_install(args):
 
 def run_status(args):
     """ Print information about the current state of the user's dotfiles. """
-    pass
+    show_links()
 
 
 def main():
