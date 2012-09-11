@@ -143,16 +143,6 @@ compinit
 #########################
 function sdl() { scp $* stephane@s13d.fr:~/.rtorrent/todl/ ;}
 
-function workon_venv() {
-if [ -e .git ]; then
-    if [ -e venv ]; then
-        echo "[INFO] local virtualenv initiated!"
-        deacticate >/dev/null 2>&1
-        source `pwd`/venv/bin/activate
-    fi
-fi
-}
-
 function venv_cd() { cd "$@" && workon_venv }
 
 alias cd='venv_cd'

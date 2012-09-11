@@ -120,8 +120,12 @@ def run_status(args):
 
 def main():
     """ Do everything. """
-    parser = argparse.ArgumentParser()
-    parser.add_argument('command', help="The command you want to use")
+    parser = argparse.ArgumentParser(description="Link user configuration "
+             "files (dot files) contained into the files directory.")
+    parser.add_argument('command',
+            help="The command you want to use. Possible commands are "
+            "install (install every dotfile) "
+            "status (print status of each dotfile)")
     args = parser.parse_args()
     
     # dispatch command to functions
@@ -135,3 +139,4 @@ def main():
 
 if __name__ == '__main__':
     main()
+
