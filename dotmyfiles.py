@@ -5,7 +5,6 @@
 
 # system
 import argparse
-import getpass
 import os
 import re
 from subprocess import call
@@ -21,24 +20,22 @@ def print_info_ko(message):
     print('[INFO] \x1b[{0}m{1}\x1b[0m'.format(33, message))
 
 
+def print_error(message):
+    """ Format a string into an KO information shell line. """
+    print('[ERROR] \x1b[{0}m{1}\x1b[0m'.format(31, message))
+
+
 def current_dir():
     return os.path.dirname(os.path.abspath(__file__))
 
 
 def init():
     """ Get all third-party code. """
-    call(['git', 'submodule', 'init'])
-    call(['git', 'submodule', 'update'])
-
-#    call(['git', 'clone',
-#    'git://github.com/altercation/solarized.git',
-#    'external/solarized'])
-#    call(['git', 'clone',
-#    'git://github.com/phiggins/konsole-colors-solarized.git',
-#    'external/konsole-colors-solarized'])
-#    call(['git', 'clone',
-#    'git://github.com/hayalci/kde-colors-solarized.git',
-#    'external/kde-colors-solarized'])
+    try:
+        call(['git', 'submodule', '--quiet', 'init'])
+        call(['git', 'submodule', '--quiet', 'update'])
+    except OSError:
+        print_error("Install git to be able to init your submodules!\n")
 
 
 def make_symlink(src, dst):
@@ -50,24 +47,23 @@ def make_symlink(src, dst):
         else:
             print_info_ko("There is a file already named {0}".format(dst))
     else:
-        print_info_ko("{0} is already linked to {1}".format(src, dst))
+        print("[INFO] {0} is already linked to {1}"
+                .format(os.path.basename(src), dst))
 
 
 def link_files():
     """ Create symbolic links to everything in the files directory
         except already dotted files. """
-    username = getpass.getuser()
     fileslist = os.listdir(os.path.join(os.path.dirname(__file__), 'files'))
     for filename in fileslist:
         if not filename.startswith('.'):
             localname = os.path.join(current_dir(), 'files', filename)
-            deployname = os.path.join('/home', username, '.' + filename)
+            deployname = os.path.join(os.environ['HOME'], '.' + filename)
             make_symlink(localname, deployname)
 
 
 def show_links():
     """ Check symbolic links already installed against what's into 'files'."""
-    username = getpass.getuser()
     fileslist = os.listdir(os.path.join(os.path.dirname(__file__), 'files'))
 
     max_length = 0
@@ -75,7 +71,7 @@ def show_links():
     for filename in fileslist:
         if not filename.startswith('.'):
             localname = os.path.join(current_dir(), 'files', filename)
-            dst = os.path.join('/home', username, '.' + filename)
+            dst = os.path.join(os.environ['HOME'], '.' + filename)
             dst_list.append((localname, dst))
             if max_length < len(dst):
                 max_length = len(dst)
@@ -87,11 +83,17 @@ def show_links():
             if not os.path.exists(dst):
                 print_info_ok("{0:{1}} No link (yet)!".format(dst, max_length))
             else:
-                print_info_ko("{0:{1}} There's a file at this place...".format(dst, max_length))
+                print_info_ko("{0:{1}} There's a file at this place..."
+                        .format(dst, max_length))
         else:
             target = os.path.join(os.path.dirname(dst), os.readlink(dst))
             if target == localname:
                 print("[INFO] {0:{1}} OK".format(dst, max_length))
+            else:
+                print_info_ko("{0:{1}} There's a link to {2} at this place..."
+                        .format(dst, max_length, target))
+
+    print("\n[INFO] Link your files with: ./dotmyfiles.py install")
 
 
 def link_custom():
