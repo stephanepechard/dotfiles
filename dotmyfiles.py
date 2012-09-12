@@ -30,7 +30,7 @@ def current_dir():
 
 
 def init():
-    """ Get all third-party code. """
+    """ Get all third-party code into git submodules. """
     try:
         call(['git', 'submodule', '--quiet', 'init'])
         call(['git', 'submodule', '--quiet', 'update'])
