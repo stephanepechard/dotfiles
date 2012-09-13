@@ -4,6 +4,6 @@
     Created by Stéphane Péchard on 2012-07-23. """
 
 CUSTOM_FILES = [
-    # ex: ['filename into custom directory', 'absolute path or relative to main dotfiles directory'],
+    # ex: ['filename into custom directory', 'path to link'],
     [ 's13d.zsh-theme', 'files/oh-my-zsh/themes/s13d.zsh-theme' ],
 ]

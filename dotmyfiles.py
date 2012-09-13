@@ -6,8 +6,8 @@
 # system
 import argparse
 import os
-import re
 from subprocess import call
+from custom import CUSTOM_FILES
 
 
 def print_info_ok(message):
@@ -26,6 +26,7 @@ def print_error(message):
 
 
 def current_dir():
+    """ Return the current file directory name. """
     return os.path.dirname(os.path.abspath(__file__))
 
 
@@ -62,7 +63,7 @@ def link_files():
             make_symlink(localname, deployname)
 
 
-def show_links():
+def show_files():
     """ Check symbolic links already installed against what's into 'files'."""
     fileslist = os.listdir(os.path.join(os.path.dirname(__file__), 'files'))
 
@@ -98,26 +99,35 @@ def show_links():
 
 def link_custom():
     """ Create specific symbolic links to customed files. """
-    fileslist = os.listdir(os.path.join(os.path.dirname(__file__), 'custom'))
-    for filename in fileslist:
-        if not filename.startswith('.'):
-            (root, ext) = os.path.splitext(filename) 
-            if ext == '.zsh-theme':
-                localname = os.path.join(current_dir(), 'custom', filename)
-                deployname = os.path.join(current_dir(), 'files/oh-my-zsh/themes', filename)
-                make_symlink(localname, deployname)
+    for localfile, deployfile in CUSTOM_FILES:
+        localname = os.path.join(current_dir(), 'custom', localfile)
+        deployname = os.path.join(current_dir(), deployfile)
+        make_symlink(localname, deployname)
 
 
-def run_install(args):
+def show_custom():
+    """ Check symbolic links already installed against what's into 'custom'."""
+    max_length = 0
+    for localfile, deployfile in CUSTOM_FILES:
+        deployname = os.path.join(current_dir(), deployfile)
+        if max_length < len(deployname):
+            max_length = len(deployname)
+    
+    dst_list = sorted(CUSTOM_FILES, key=lambda d: d[0])   # sort by localname
+    max_length = max_length + 4
+
+
+def run_install():
     """ Install every dotfile. """
-    init()
-    link_files()
+    # init()
+    # link_files()
     link_custom()
 
 
-def run_status(args):
+def run_status():
     """ Print information about the current state of the user's dotfiles. """
-    show_links()
+    show_files()
+    show_custom()
 
 
 def main():
@@ -132,13 +142,27 @@ def main():
     
     # dispatch command to functions
     if args.command == 'install':
-        run_install(args)
+        run_install()
 
     if args.command == 'status':
-        run_status(args)
-
+        run_status()
     
 
 if __name__ == '__main__':
     main()
 
+
+
+# 
+# def link_custom_old():
+#     """ Create specific symbolic links to customed files. """
+#     fileslist = os.listdir(os.path.join(os.path.dirname(__file__), 'custom'))
+#     for filename in fileslist:
+#         if not filename.startswith('.'):
+#             (root, ext) = os.path.splitext(filename) 
+#             if ext == '.zsh-theme':
+#                 localname = os.path.join(current_dir(), 'custom', filename)
+#                 deployname = os.path.join(current_dir(),
+#                   'files/oh-my-zsh/themes', filename)
+#                 make_symlink(localname, deployname)
+# 
