@@ -109,9 +109,8 @@ nnoremap <leader>w <C-w>v<C-w>l
 
 "" minibufexpl
 let g:miniBufExplMapWindowNavVim = 1 " use Ctrl + [hjkl] to window movement commands
-let g:miniBufExplMapWindowNavArrows = 1 " use Ctrl + arrows to window movement commands
-let g:miniBufExplSplitBelow=1 " Put new window below current or on the right for vertical split
-
+"let g:miniBufExplMapWindowNavArrows = 1 " use Ctrl + arrows to window movement commands
+"let g:miniBufExplSplitBelow=1 " Put new window below current or on the right for vertical split
 
 
 set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 10
@@ -134,3 +133,4 @@ nmap <C-o> <c-w><left><CR>
 set fillchars+=stl:\ ,stlnc:\
 
 " =========== END Plugin Settings =========="
+

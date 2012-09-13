@@ -65,6 +65,7 @@ def link_files():
 
 def show_files():
     """ Check symbolic links already installed against what's into 'files'."""
+    print("[INFO] Files to be linked:")
     fileslist = os.listdir(os.path.join(os.path.dirname(__file__), 'files'))
 
     max_length = 0
@@ -94,7 +95,6 @@ def show_files():
                 print_info_ko("{0:{1}} There's a link to {2} at this place..."
                         .format(dst, max_length, target))
 
-    print("\n[INFO] Link your files with: ./dotmyfiles.py install")
 
 
 def link_custom():
@@ -107,6 +107,7 @@ def link_custom():
 
 def show_custom():
     """ Check symbolic links already installed against what's into 'custom'."""
+    print("\n[INFO] Customed files to be linked:")
     max_length = 0
     for localfile, deployfile in CUSTOM_FILES:
         deployname = os.path.join(current_dir(), deployfile)
@@ -128,6 +129,7 @@ def run_status():
     """ Print information about the current state of the user's dotfiles. """
     show_files()
     show_custom()
+    print("\n[INFO] Link your files with: ./dotmyfiles.py install")
 
 
 def main():
