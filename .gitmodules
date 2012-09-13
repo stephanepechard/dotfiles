@@ -7,3 +7,6 @@
 [submodule "submodules/vim-minibufexpl"]
 	path = submodules/vim-minibufexpl
 	url = https://github.com/fholgado/minibufexpl.vim.git
+[submodule "submodules/Command-T"]
+	path = submodules/Command-T
+	url = git://github.com/wincent/Command-T.git

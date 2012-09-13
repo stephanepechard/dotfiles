@@ -115,6 +115,8 @@ let g:miniBufExplMapWindowNavVim = 1 " use Ctrl + [hjkl] to window movement comm
 
 set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 10
 let g:Powerline_symbols = 'fancy'
+
+"" commandT
 let g:CommandTMaxFiles=5000
 let g:CommandTMaxHeight=12
 map <C-o> :CommandT<CR>
