@@ -120,8 +120,8 @@ def show_custom():
 
 def run_install():
     """ Install every dotfile. """
-    # init()
-    # link_files()
+    init()
+    link_files()
     link_custom()
 
 
