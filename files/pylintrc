@@ -1,0 +1,35 @@
+#
+#  .pylintrc
+#
+
+[MESSAGES CONTROL]
+# C0324 : Comma not followed by a space
+# C0111 : Missing docstring
+# C0301 : Line too long
+# W0311 : Bad indentation
+# C0103 : Invalid name
+# W0611 : Unused import
+# R0902 : Too many instance attributes
+# W0613 : Unused argument
+# R0904 : Too many public methods
+# W0613 : Unused argument
+# W0201 : Attribute 'd' defined outside __init__
+# R0913 : Too many arguments
+# W0404 : Reimport 'time'
+# W0612 : Unused variable
+# W0614 : Unused import %s from wildcard import*
+# C0322 : Operator not preceded by a space
+# R0914 : Too many local variables
+# E0602 : Undefined variable 're'
+# R0903 : Too few public method
+# C0302 : Too many lines in module
+# C0323 : Operator not followed by a space
+# C0112 : Empty docstring*
+# E1101 :  Module 'twisted.internet.reactor' has no 'callLater' member
+# W0511 : ex: TODO ..(look [MISCELLANEOUS] notes= ..)
+# R0201 : Method could be a function
+# W0232 : Class has no init method :
+
+# Disable the message(s) with the given id(s).
+disable-msg=C0322
+

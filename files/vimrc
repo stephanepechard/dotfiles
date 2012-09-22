@@ -1,0 +1,138 @@
+" ========== Vim Basic Settings ============="
+
+"" Pathogen settings.
+filetype off
+call pathogen#runtime_append_all_bundles()
+filetype plugin indent on
+
+"" Make vim incompatbile to vi.
+set nocompatible
+set modelines=0
+
+"" TAB settings.
+set tabstop=4
+set shiftwidth=4
+set softtabstop=4
+set expandtab
+
+"" More Common Settings.
+set encoding=utf-8
+set scrolloff=3
+syntax on
+set autoindent
+set showmode
+set showcmd
+set hidden
+set wildmenu
+set wildmode=list:longest
+set visualbell
+set noerrorbells
+set lazyredraw
+set fillchars+=stl:\ ,stlnc:\
+
+"" Set cursorline
+set ttyfast
+set ruler
+set backspace=indent,eol,start
+set laststatus=2
+set cursorline
+
+"" Line numbers
+set number
+set relativenumber      "" changes Vim’s line number column to display how far away each line is from the current one
+
+"" Sync and undo
+set nofsync
+set swapsync=
+set undofile
+set directory=~/.vim/tmp
+
+"" Change the leader key
+let mapleader = ","
+
+" Set title to window
+set title
+
+""" searching/moving
+nnoremap / /\v
+vnoremap / /\v
+set ignorecase
+set smartcase
+set gdefault
+set incsearch
+set showmatch
+set hlsearch
+nnoremap <tab> %
+vnoremap <tab> %
+
+"" Make Vim to handle long lines nicely.
+set wrap
+set textwidth=79
+set formatoptions=qrn1
+set colorcolumn=80
+colorschem desert
+highlight ColorColumn ctermbg=lightgrey
+highlight ColorColumn guibg=lightgrey
+" highlight OverLength ctermbg=darkgray ctermfg=white guibg=#592929
+" match OverLength /\%81v.\+/
+
+
+
+"" hardcore Vim, disable arrows to force you to use hjkl :-)
+nnoremap <up> <nop>
+nnoremap <down> <nop>
+nnoremap <left> <nop>
+nnoremap <right> <nop>
+inoremap <up> <nop>
+inoremap <down> <nop>
+inoremap <left> <nop>
+inoremap <right> <nop>
+nnoremap j gj
+nnoremap k gk
+
+"" save on losing focus
+au FocusLost * :wa
+
+" ========== END Vim Basic Settings ============="
+
+
+
+" ========== Leader mappings =========="
+"" clear a search result
+nnoremap <leader><space> :noh<cr>
+
+"" strip all trailing whitespace in the current file
+nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
+
+"" open a new vertical window and go for it
+nnoremap <leader>w <C-w>v<C-w>l
+
+
+" ========== END Leader mappings =========="
+
+
+
+" ========== Plugin Settings =========="
+
+"" minibufexpl
+let g:miniBufExplMapWindowNavVim = 1 " use Ctrl + [hjkl] to window movement commands
+
+"" commandT
+" let g:CommandTMaxFiles=5000
+" let g:CommandTMaxHeight=12
+" map <C-o> :CommandT<CR>
+" let g:CommandTAcceptSelectionMap = '<CR>'
+" let g:CommandTCancelMap = '<C-g>'
+
+"" NERDTree
+autocmd vimenter * NERDTree " open a NERDTree automatically when vim starts up
+autocmd vimenter * if !argc() | NERDTree | endif " open a NERDTree automatically when vim starts up if no files were specified
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif " close vim if the only window left open is a NERDTree
+
+let NERDChristmasTree = 1 " Tells the NERD tree to make itself colourful and pretty.
+let NERDTreeSortOrder = ['\/$', '\.py*', '\.c$', '\.cpp$', '\.h$', '*']
+nmap <c-b> :NERDTreeToggle<cr>
+
+
+" =========== END Plugin Settings =========="
+
