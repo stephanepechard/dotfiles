@@ -124,7 +124,10 @@ let g:CommandTAcceptSelectionMap = '<CR>'
 let g:CommandTCancelMap = '<C-g>'
 
 " Mapping to NERDTree
-"" nnoremap <C-n> :NERDTreeToggle<cr>
+autocmd vimenter * NERDTree " open a NERDTree automatically when vim starts up
+autocmd vimenter * if !argc() | NERDTree | endif " open a NERDTree automatically when vim starts up if no files were specified
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif " close vim if the only window left open is a NERDTree
+
 let NERDChristmasTree = 1
 let NERDTreeSortOrder = ['\/$', '\.js*', '\.cpp$', '\.h$', '*']
 nmap <c-b> :NERDTreeToggle<cr>

@@ -39,6 +39,15 @@ def init():
         print_error("Install git to be able to init your submodules!\n")
 
 
+def self_update():
+    """ Push new server version into local repo. """
+    try:
+        call(['git', 'push', '--quiet'])
+    except OSError:
+        print_error("Install git to update!\n")
+
+
+
 def make_symlink(src, dst):
     """ Securely create a symbolic link. """
     if not os.path.islink(dst):
@@ -132,6 +141,13 @@ def run_status():
     print("\n[INFO] Link your files with: ./dotmyfiles.py install")
 
 
+def run_update():
+    """ Update full installation. """
+    self_update() # local git push
+    init() # update the submodules
+    print_info_ok("Update successful!")
+
+
 def main():
     """ Do everything. """
     parser = argparse.ArgumentParser(description="Link user configuration "
@@ -139,7 +155,8 @@ def main():
     parser.add_argument('command',
             help="The command you want to use. Possible commands are "
             "install (install every dotfile) "
-            "status (print status of each dotfile)")
+            "status (print status of each dotfile)"
+            "update (update submodules and local repository).")
     args = parser.parse_args()
     
     # dispatch command to functions
@@ -148,6 +165,9 @@ def main():
 
     if args.command == 'status':
         run_status()
+
+    if args.command == 'update':
+        run_update()
     
 
 if __name__ == '__main__':
