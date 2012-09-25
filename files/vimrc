@@ -88,6 +88,10 @@ inoremap <right> <nop>
 nnoremap j gj
 nnoremap k gk
 
+" easy tab switch
+map <C-Tab> :bnext<cr>
+map <C-S-Tab> :bprevious<cr>
+
 "" save on losing focus
 au FocusLost * :wa
 
