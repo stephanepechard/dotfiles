@@ -76,8 +76,6 @@ highlight ColorColumn guibg=lightgrey
 " highlight OverLength ctermbg=darkgray ctermfg=white guibg=#592929
 " match OverLength /\%81v.\+/
 
-
-
 "" hardcore Vim, disable arrows to force you to use hjkl :-)
 nnoremap <up> <nop>
 nnoremap <down> <nop>
@@ -132,7 +130,6 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTree
 let NERDChristmasTree = 1 " Tells the NERD tree to make itself colourful and pretty.
 let NERDTreeSortOrder = ['\/$', '\.py*', '\.c$', '\.cpp$', '\.h$', '*']
 nmap <c-b> :NERDTreeToggle<cr>
-
 
 " =========== END Plugin Settings =========="
 

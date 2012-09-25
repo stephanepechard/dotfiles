@@ -130,7 +130,6 @@ def show_files():
                               .format(dst, max_length, target))
 
 
-
 def link_custom():
     """ Create specific symbolic links to customed files. """
     for localfile, deployfile in CUSTOM_FILES:
