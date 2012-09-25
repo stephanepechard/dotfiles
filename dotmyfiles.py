@@ -47,6 +47,23 @@ def self_update():
         print_error("Install git to update!\n")
 
 
+def make_commandT():
+    directory = '.vim/bundle/command-t/ruby/command-t'
+    try:
+        os.chdir(os.path.join(os.environ['HOME'], directory))
+    except OSError:
+        print_error("Directory {0} does not exist!".format(directory))
+
+    try:
+        call(['ruby', 'extconf.rb'])
+    except OSError:
+        print_error("Install ruby to install Command-T!\n")
+
+    try:
+        returncode = call(['make'])
+    except OSError:
+        print_error("Command-T compilation failed!\n")
+
 
 def make_symlink(src, dst):
     """ Securely create a symbolic link. """
@@ -55,7 +72,8 @@ def make_symlink(src, dst):
             print_info_ok("{0} -> {1}".format(src, dst))
             os.symlink(src, dst)
         else:
-            print_info_ko("There is a file already named {0}".format(dst))
+            print_info_ko("There is a file already named {0}"
+                                                        .format(dst))
     else:
         print("[INFO] {0} is already linked to {1}"
                 .format(os.path.basename(src), dst))
@@ -64,18 +82,22 @@ def make_symlink(src, dst):
 def link_files():
     """ Create symbolic links to everything in the files directory
         except already dotted files. """
-    fileslist = os.listdir(os.path.join(os.path.dirname(__file__), 'files'))
+    fileslist = os.listdir(os.path.join(os.path.dirname(__file__),
+                                                            'files'))
     for filename in fileslist:
         if not filename.startswith('.'):
             localname = os.path.join(current_dir(), 'files', filename)
-            deployname = os.path.join(os.environ['HOME'], '.' + filename)
+            deployname = os.path.join(os.environ['HOME'], '.' +
+                                                            filename)
             make_symlink(localname, deployname)
 
 
 def show_files():
-    """ Check symbolic links already installed against what's into 'files'."""
+    """ Check symbolic links already installed against what's
+        into 'files' directory. """
     print("[INFO] Files to be linked:")
-    fileslist = os.listdir(os.path.join(os.path.dirname(__file__), 'files'))
+    fileslist = os.listdir(os.path.join(os.path.dirname(__file__),
+                                                            'files'))
 
     max_length = 0
     dst_list = []
@@ -87,22 +109,25 @@ def show_files():
             if max_length < len(dst):
                 max_length = len(dst)
 
-    dst_list = sorted(dst_list, key=lambda d: d[0])   # sort by localname
+    dst_list = sorted(dst_list, key=lambda d: d[0]) # sort by localname
     max_length = max_length + 4
     for localname, dst in dst_list:
         if not os.path.islink(dst):
             if not os.path.exists(dst):
-                print_info_ok("{0:{1}} No link (yet)!".format(dst, max_length))
+                print_info_ok("{0:{1}} No link (yet)!"
+                              .format(dst, max_length))
             else:
                 print_info_ko("{0:{1}} There's a file at this place..."
                         .format(dst, max_length))
         else:
-            target = os.path.join(os.path.dirname(dst), os.readlink(dst))
+            target = os.path.join(os.path.dirname(dst),
+                                  os.readlink(dst))
             if target == localname:
                 print("[INFO] {0:{1}} OK".format(dst, max_length))
             else:
-                print_info_ko("{0:{1}} There's a link to {2} at this place..."
-                        .format(dst, max_length, target))
+                print_info_ko("{0:{1}} There's a link to {2} "
+                              "at this place..."
+                              .format(dst, max_length, target))
 
 
 
@@ -115,7 +140,8 @@ def link_custom():
 
 
 def show_custom():
-    """ Check symbolic links already installed against what's into 'custom'."""
+    """ Check symbolic links already installed against what's
+        into 'custom' directory. """
     print("\n[INFO] Customed files to be linked:")
     max_length = 0
     for localfile, deployfile in CUSTOM_FILES:
@@ -123,7 +149,8 @@ def show_custom():
         if max_length < len(deployname):
             max_length = len(deployname)
     
-    dst_list = sorted(CUSTOM_FILES, key=lambda d: d[0])   # sort by localname
+    # sort by localname
+    dst_list = sorted(CUSTOM_FILES, key=lambda d: d[0])
     max_length = max_length + 4
 
 
@@ -135,7 +162,7 @@ def run_install():
 
 
 def run_status():
-    """ Print information about the current state of the user's dotfiles. """
+    """ Print information about the current state of the dotfiles. """
     show_files()
     show_custom()
     print("\n[INFO] Link your files with: ./dotmyfiles.py install")
@@ -150,13 +177,16 @@ def run_update():
 
 def main():
     """ Do everything. """
-    parser = argparse.ArgumentParser(description="Link user configuration "
-             "files (dot files) contained into the files directory.")
+    parser = argparse.ArgumentParser(description="Link "
+            "user configuration files (dot files) contained "
+            "into the files directory.")
     parser.add_argument('command',
             help="The command you want to use. Possible commands are "
             "install (install every dotfile) "
             "status (print status of each dotfile)"
-            "update (update submodules and local repository).")
+            "update (update submodules and local repository) "
+            "make_commandT (build command-t module, "
+            "see docs for more info).")
     args = parser.parse_args()
     
     # dispatch command to functions
@@ -168,23 +198,11 @@ def main():
 
     if args.command == 'update':
         run_update()
+        
+    if args.command == 'make_commandT':
+        make_commandT()
     
 
 if __name__ == '__main__':
     main()
 
-
-
-# 
-# def link_custom_old():
-#     """ Create specific symbolic links to customed files. """
-#     fileslist = os.listdir(os.path.join(os.path.dirname(__file__), 'custom'))
-#     for filename in fileslist:
-#         if not filename.startswith('.'):
-#             (root, ext) = os.path.splitext(filename) 
-#             if ext == '.zsh-theme':
-#                 localname = os.path.join(current_dir(), 'custom', filename)
-#                 deployname = os.path.join(current_dir(),
-#                   'files/oh-my-zsh/themes', filename)
-#                 make_symlink(localname, deployname)
-# 
