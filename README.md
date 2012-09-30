@@ -1,30 +1,45 @@
 dotfiles
 ========
-
-My . files + a little script to install everything smoothly on any UNIX-like device.
-
-Installation
-------------
-
-    git clone git://github.com/stephanepechard/dotfiles.git
-
-Where possible, Vim plugins are installed as git submodules. Check these out by
-running the commands:
-
-    git submodule init
-    git submodule update
+You probably don't care about my very own dotfiles. What could be
+of any interest to you is a little script to install all these dotfiles
+on any UNIX-like device. I called it `dotmyfiles.py`.
 
 
-### Command-t
+Typical usage
+-------------
+Put all your files to be dotted into the `files` directory, **WITHOUT** the dot.
+Edit the `custom.py` file to specify the link to be done by the script between
+a file into the `custom` directory and its target which can be anywhere in
+your filesystem. When it's ready, type:
 
-The command-t extension require Vim with ruby support, and furthermore, the
-ruby code depends on a C extension for extra speed. The usual pathogen
-installation proceedure didn't work for me, but I followed these steps to make
-it work:
+    ./dotmyfiles install
 
-    cd ~/dotfiles/vim/bundle/command-t/ruby/command-t
-    ruby extconf.rb
-    make
+to create links between your files into the `files` directory and their
+dotted counterparts. As everything here is linked, you should never remove
+what's in the `files` directory. This is **NOT** a copy.
 
-That did the trick.
+Don't worry what is already into your home, nothing is ever overwritten.
+The command will indicate to you the current status of the install.
+To be sure of what you do before, you can use:
 
+    ./dotmyfiles status
+
+to print the status of each dotfile.
+
+The simple:
+
+    ./dotmyfiles update
+
+will fetch any submodule you installed into your repository (I do that, look
+at my `.gitmodules` file, I install Vim plugins as git submodules.)
+
+
+Command-t
+---------
+The [command-t](https://github.com/wincent/Command-T) extension requires
+Vim with ruby support, and furthermore, the ruby code depends
+on a C extension for extra speed. There's a specific command to do it directly:
+
+    ./dotmyfiles make_commandT
+
+Neat, right?
