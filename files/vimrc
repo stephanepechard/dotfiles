@@ -50,6 +50,10 @@ set directory=~/.vim/tmp
 "" Change the leader key
 let mapleader = ","
 
+" set spell check
+syn spell toplevel
+setlocal spell spelllang=fr
+
 " Set title to window
 set title
 
