@@ -147,7 +147,7 @@ def show_custom():
         deployname = os.path.join(current_dir(), deployfile)
         if max_length < len(deployname):
             max_length = len(deployname)
-    
+
     # sort by localname
     dst_list = sorted(CUSTOM_FILES, key=lambda d: d[0])
     max_length = max_length + 4
@@ -181,13 +181,13 @@ def main():
             "into the files directory.")
     parser.add_argument('command',
             help="The command you want to use. Possible commands are "
-            "install (install every dotfile) "
-            "status (print status of each dotfile)"
-            "update (update submodules and local repository) "
+            "install (install every dotfile), "
+            "status (print status of each dotfile), "
+            "update (update submodules and local repository), "
             "make_commandT (build command-t module, "
             "see docs for more info).")
     args = parser.parse_args()
-    
+
     # dispatch command to functions
     if args.command == 'install':
         run_install()
@@ -197,10 +197,10 @@ def main():
 
     if args.command == 'update':
         run_update()
-        
+
     if args.command == 'make_commandT':
         make_commandT()
-    
+
 
 if __name__ == '__main__':
     main()
