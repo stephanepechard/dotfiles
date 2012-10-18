@@ -51,8 +51,8 @@ set directory=~/.vim/tmp
 let mapleader = ","
 
 " set spell check
-syn spell toplevel
-setlocal spell spelllang=fr
+" syn spell toplevel
+" setlocal spell spelllang=fr
 
 " Set title to window
 set title
