@@ -28,12 +28,6 @@ alias r='python manage.py runserver'
 alias sl=ls # often screw this up
 alias kk='ll'
 alias mm='ll'
-# local machine
-alias dolly='ssh -p 4242 stephane@192.168.0.10'
-alias marvin="ssh -c arcfour,blowfish-cbc -XC stephane@192.168.0.11"
-alias snoweee='ssh -c arcfour,blowfish-cbc -XC eloise@192.168.0.12'
-alias tineee='ssh -c arcfour,blowfish-cbc -XC stephane@192.168.0.13'
-alias cosmocat='ssh -c arcfour,blowfish-cbc -XC eloise@192.168.0.14'
 
 
 # Push and pop directories on directory stack
