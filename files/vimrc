@@ -45,6 +45,8 @@ set relativenumber      "" changes Vim’s line number column to display how far
 set nofsync
 set swapsync=
 set undofile
+set undodir=~/.vim/tmp
+set backupdir=~/.vim/tmp
 set directory=~/.vim/tmp
 
 "" Change the leader key
@@ -137,6 +139,7 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTree
 
 let NERDChristmasTree = 1 " Tells the NERD tree to make itself colourful and pretty.
 let NERDTreeSortOrder = ['\/$', '\.py*', '\.c$', '\.cpp$', '\.h$', '*']
+let NERDTreeIgnore=['\.o$', '\~$', '\.pyc']
 nmap <c-b> :NERDTreeToggle<cr>
 
 " =========== END Plugin Settings =========="
