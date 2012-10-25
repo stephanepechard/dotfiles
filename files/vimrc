@@ -133,9 +133,10 @@ let g:miniBufExplMapWindowNavVim = 1 " use Ctrl + [hjkl] to window movement comm
 " let g:CommandTCancelMap = '<C-g>'
 
 "" NERDTree
-autocmd vimenter * NERDTree " open a NERDTree automatically when vim starts up
-autocmd vimenter * if !argc() | NERDTree | endif " open a NERDTree automatically when vim starts up if no files were specified
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif " close vim if the only window left open is a NERDTree
+autocmd VimEnter * NERDTree " open a NERDTree automatically when vim starts up
+autocmd VimEnter * if !argc() | NERDTree | endif " open a NERDTree automatically when vim starts up if no files were specified
+autocmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif " close vim if the only window left open is a NERDTree
+autocmd BufEnter * wincmd 1 " got to buffer 1 at start (ad not nerdtree)
 
 let NERDChristmasTree = 1 " Tells the NERD tree to make itself colourful and pretty.
 let NERDTreeSortOrder = ['\/$', '\.py*', '\.c$', '\.cpp$', '\.h$', '*']
