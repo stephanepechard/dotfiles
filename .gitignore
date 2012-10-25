@@ -1,3 +1,4 @@
+files/vim/tmp
 *.un~
 *.swp
 *.pyc

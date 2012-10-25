@@ -24,6 +24,9 @@ source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
 
+# Modify specific stuff
+unsetopt correct_all # no correction at all, this is too annoying...
+
 # Know where you are to be able to source *.zsh files
 THISDIR=$(dirname "$(readlink ${ZDOTDIR-~}/.zshrc )" )
 for config_file ($THISDIR/../custom/*.zsh) source $config_file
