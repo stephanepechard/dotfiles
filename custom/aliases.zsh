@@ -24,20 +24,8 @@ alias f='find . -name'
 alias pylint='pylint --rcfile=~/.pylintrc'
 alias a='source venv/bin/activate'
 alias r='python manage.py runserver'
+alias josm='java -jar -Xmx1524M ~/bin/josm-tested.jar'
 # anti-clumsy fingers
 alias sl=ls # often screw this up
 alias kk='ll'
 alias mm='ll'
-
-
-# Push and pop directories on directory stack
-alias pu='pushd'
-alias po='popd'
-
-# Super user
-alias _='sudo'
-
-# Show history
-alias history='fc -l 1'
-
-alias afind='ack-grep -il'
