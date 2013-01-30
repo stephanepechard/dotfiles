@@ -26,6 +26,8 @@ source $ZSH/oh-my-zsh.sh
 
 # Modify specific stuff
 unsetopt correct_all # no correction at all, this is too annoying...
+unsetopt share_history # no history share at all, this is too annoying too...
+
 
 # Know where you are to be able to source *.zsh files
 THISDIR=$(dirname "$(readlink ${ZDOTDIR-~}/.zshrc )" )
