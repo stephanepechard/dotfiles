@@ -1,3 +1,5 @@
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/stephanepechard/dotfiles/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
 dotfiles
 ========
 You probably don't care about my very own dotfiles. What could be
