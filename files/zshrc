@@ -43,6 +43,8 @@ autoload -Uz vcs_info
 # Android tools
 export PATH=${PATH}:~/android/sdk/tools
 export PATH=${PATH}:~/android/sdk/platform-tools
+# Node
+export PATH=${PATH}:/opt/node/bin
 
 
 ## Functions
